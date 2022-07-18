@@ -60,7 +60,7 @@ describe('It tests the component App.js', () => {
 
       history.push('/pagina/qualquer');
 
-      const notFound = screen.getByText(/Page requested not found/i);
+      const notFound = screen.getByText(/page requested not found/i);
 
       expect(notFound).toBeInTheDocument();
     });
