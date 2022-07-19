@@ -30,11 +30,13 @@ describe('It tests the Pokedex component', () => {
   it('Should have the filter buttons', () => {
     renderWithRouter(<App />);
 
-    const electric = screen.getByText(/electric/i);
+    const electric = screen.getByRole('button', { name: /electric/i });
     expect(electric).toBeInTheDocument();
 
-    const fire = screen.getByText(/fire/i);
-    expect(fire).toBeInTheDocument();
+    const anyFilterButton = screen.getAllByTestId(/pokemon-type-button/i);
+    anyFilterButton.forEach((element) => {
+      expect(element).toBeInTheDocument();
+    });
   });
 
   it('Should have a reset filter button', () => {
@@ -42,5 +44,10 @@ describe('It tests the Pokedex component', () => {
 
     const all = screen.getByText(/all/i);
     expect(all).toBeInTheDocument();
+
+    const next = screen.getByText(/próximo pokémon/i);
+    userEvent.click(all);
+
+    expect(next.disabled).toBe(false);
   });
 });
